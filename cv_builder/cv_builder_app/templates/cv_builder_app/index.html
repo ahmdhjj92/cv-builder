@@ -52,9 +52,15 @@
                         </li>
                     </ul>
                 </ul>
-                <div class="d-grid d-lg-block mt-lg-3 mx-lg-3">
-                    <a href="#" class="btn btn-lg btn-primary mb-3 me-md-3" role="button">Get Started</a>
-                </div>
+                {% if not user.is_authenticated %}
+                    <div class="d-grid d-lg-block mt-lg-3 mx-lg-3">
+                        <a href="{% url 'register' %}" class="btn btn-lg btn-primary mb-3 me-md-3" role="button">Get Started</a>
+                    </div>
+                {% else %}
+                    <div class="d-grid d-lg-block mt-lg-3 mx-lg-3">
+                        <a href="#" class="btn btn-lg btn-success mb-3 me-md-3" role="button">Start Building    </a>
+                    </div>
+                {% endif %}
             </div>
         </div>    
     </div>
