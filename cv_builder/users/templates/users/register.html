@@ -1,7 +1,7 @@
 {% extends "users/layout.html" %}
 {% load static %}
 {% block title %}
-    CV Builder - Login
+    CV Builder - Register
 {% endblock %}
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -13,7 +13,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url 'cv_builder_app:index' %}">Home</a>
@@ -28,50 +28,78 @@
 <div class="container mt-5">
     <div class="row align-items-lg-center">
         <div class="col-md-6 order-md-2 col-lg-6 text-center">
-            <form method="POST">
-                
-                {% csrf_token %}
-                <h1 class="h3 mb-3 fw-bold">Register to CV Builder</h1>
-                {% if form.errors %}
-
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
-                    {% for error in form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            <strong>{{ error|escape }}</strong>
-                        </div>
-                    {% endfor %}
-                {% endif %} 
-            
-                <div class="form-floating mt-3 mb-1">
-                    <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email Address">
-                    <label for="floatingInput">Email Address</label>
-                  </div>
-                <div class="form-floating mt-1 mb-1">
-                    <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
-                    <label for="floatingInput">Username</label>
-                  </div>
-                <div class="form-floating mt-1 mb-1">
-                    <input type="password" name="password1" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                  </div>
-                <div class="form-floating mt-1 mb-3">
-                    <input type="password" name="password2" class="form-control" id="floatingPassword" placeholder="Confirm Password">
-                    <label for="floatingPassword">Confirm Password</label>
-                  </div>
-                
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
-                <div class="order-md-3 mb-3 pt-3">
-                    <small class="text-muted">
-                        Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Log In</a>
-                    </small>
+            {% if user.is_authenticated%}
+                <h1 class="h3 mb-3 fw-bold">You are currently logged in</h1>
+                <div class="row">
+                    <h1 class="col-5 h4 mb-3"> <a class="text-decoration-none" href="{% url 'cv_builder_app:index' %}">Go to Home</a> </h1>
+                    <h1 class="col-2 h4 mb-3 fw-light"> or </h1>
+                    <h1 class="col-5 h4 mb-3 fw-light"> <a class="text-decoration-none" href="{% url 'logout' %}">Logout</a> </h1>                    
                 </div>
-              </form>
+            {% else %}
+                <form method="POST">
+                    
+                    {% csrf_token %}
+                    <h1 class="h3 mb-3 fw-bold">Register to CV Builder</h1>
+                    <div>
+                        {% if form.errors %}
+                                {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %} 
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input type="text" name="first_name" class="form-control" id="floatingInput" placeholder="First Name">
+                                <label for="floatingInput">First Name</label>
+                            </div>                        
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input type="text" name="last_name" class="form-control" id="floatingInput" placeholder="Last Name">
+                                <label for="floatingInput">Last Name</label>
+                            </div>                        
+                        </div>
+                    </div>
+                    <div class="form-floating mt-2 mb-2">
+                        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email Address">
+                        <label for="floatingInput">Email Address</label>
+                    </div>
+                    <div class="form-floating mt-2 mb-2">
+                        <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+                        <label for="floatingInput">Username</label>
+                    </div>
+                    <div class="row mt-2 mb-3">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input type="password" name="password1" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input type="password" name="password2" class="form-control" id="floatingPassword" placeholder="Confirm Password">
+                                <label for="floatingPassword">Confirm Password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+                    <div class="order-md-3 mb-3 pt-3">
+                        <small class="text-muted">
+                            Already Have An Account? <a class="ml-2 text-decoration-none" href="{% url 'login' %}">Log In</a>
+                        </small>
+                    </div>
+                </form>
+            {% endif %}
         </div>
 
         <div class="col-8 mx-auto col-md-6 order-md-1 col-lg-6 d-none d-md-block">
