@@ -1,4 +1,4 @@
-{% extends "users/layout.html" %}
+{% extends "cv_builder_app/layout.html" %}
 {% load static %}
 {% block title %}
     CV Builder - Register
@@ -6,19 +6,19 @@
 {% block content %}
 <div class="container mt-5">
     <div class="row align-items-lg-center">
-        <div class="col-md-6 order-md-2 col-lg-6 text-center">
+        <div class="col-md-6 order-md-2 col-lg-6">
             {% if user.is_authenticated%}
-                <h1 class="h3 mb-3 fw-bold">You are currently logged in</h1>
+                <h1 class="h3 mb-3 fw-bold text-center">You are currently logged in</h1>
                 <div class="row">
-                    <h1 class="col-5 h4 mb-3"> <a class="text-decoration-none" href="{% url 'cv_builder_app:index' %}">Go to Home</a> </h1>
-                    <h1 class="col-2 h4 mb-3 fw-light"> or </h1>
-                    <h1 class="col-5 h4 mb-3 fw-light"> <a class="text-decoration-none" href="{% url 'logout' %}">Logout</a> </h1>                    
+                    <a class="col-5 btn btn-outline-dark" href="{% url 'cv_builder_app:index' %}">Back to Home</a>
+                    <h1 class="col-2 h4 fw-light text-center pt-1"> or </h1>
+                    <a class="col-5 btn btn-outline-secondary" href="{% url 'logout' %}">Logout</a>                   
                 </div>
             {% else %}
                 <form method="POST">
                     
                     {% csrf_token %}
-                    <h1 class="h3 mb-3 fw-bold">Register to CV Builder</h1>
+                    <h1 class="h3 mb-3 fw-bold text-center">Register to CV Builder</h1>
                     <div>
                         {% if form.errors %}
                                 {% for field in form %}

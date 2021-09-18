@@ -1,4 +1,4 @@
-{% extends "users/layout.html" %}
+{% extends "cv_builder_app/layout.html" %}
 {% load static %}
 {% block title %}
     CV Builder - Logout
@@ -9,10 +9,10 @@
         <div class="col-md-6 order-md-2 col-lg-6 text-center">
             <h1 class="h3 mb-3 fw-bold">You are logged out!</h1>
             <div class="row">
-                <h1 class="col-5 h4 mb-3 fw-light"> <a class="text-decoration-none" href="{% url 'login' %}">Log in</a> </h1>
-                <h1 class="col-2 h4 mb-3 fw-light"> or </h1>
-                <h1 class="col-5 h4 mb-3 fw-bold"> <a class="text-decoration-none" href="{% url 'register' %}">Register</a> </h1>                    
-            </div>
+                <a class="col-5 btn btn-outline-dark" href="{% url 'login' %}">Login</a>
+                <h1 class="col-2 h4 fw-light text-center pt-1"> or </h1>
+                <a class="col-5 btn btn-outline-secondary" href="{% url 'register' %}">Register</a>                   
+        </div>
         </div>
         <div class="col-8 mx-auto col-md-6 order-md-1 col-lg-6 d-none d-md-block">
             <img src="{% static 'users/undraw_online_resume_re_ru7s.svg' %}" alt="A person standing using her laptop" class="img-fluid mb-3 mb-md-0"/>

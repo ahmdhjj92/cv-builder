@@ -1,4 +1,4 @@
-{% extends "users/layout.html" %}
+{% extends "cv_builder_app/layout.html" %}
 {% load static %}
 {% block title %}
 CV Builder - Login
@@ -17,9 +17,9 @@ CV Builder - Login
             {% if user.is_authenticated%}
                 <h1 class="h3 mb-3 fw-bold">You are already logged in</h1>
                 <div class="row">
-                    <h1 class="col-5 h4 mb-3"> <a class="text-decoration-none" href="{% url 'cv_builder_app:index' %}">Go to Home</a> </h1>
-                    <h1 class="col-2 h4 mb-3 fw-light"> or </h1>
-                    <h1 class="col-5 h4 mb-3 fw-light"> <a class="text-decoration-none" href="{% url 'logout' %}">Logout</a> </h1>                    
+                    <a class="col-5 btn btn-outline-dark" href="{% url 'cv_builder_app:index' %}">Back to Home</a>
+                    <h1 class="col-2 h4 fw-light text-center pt-1"> or </h1>
+                    <a class="col-5 btn btn-outline-secondary" href="{% url 'logout' %}">Logout</a>                   
                 </div>
             {% else %}
                 <form method="POST" action="{% url 'login' %}">
