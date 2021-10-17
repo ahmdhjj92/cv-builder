@@ -3,21 +3,6 @@ from django.db.models.fields import CharField
 from django.db.models.lookups import Transform
 
 # Create your models here.
-class ContactInformation(models.Model):
-    first_name = models.CharField(max_length=100)
-    middle_name = models.CharField(max_length=100, blank=True)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField()
-    website = models.URLField(null=True, blank=True)
-    linkedin_profile = models.URLField(null=True, blank=True)
-    phone_number  = models.SlugField(max_length=100)
-    address = models.SlugField(max_length=200)
-
-
-class ProfessionalSummary(models.Model):
-    summary = models.TextField()
-
-
 class Responsability(models.Model):
     responsability = models.TextField()
 
