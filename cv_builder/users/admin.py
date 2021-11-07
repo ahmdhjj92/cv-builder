@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django import forms
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
-from .models import CVBUser
+from .models import CVBUser, Certification, Education, Language, Project, WorkExperienceEntry
 
 # Register your models here.
 class UserCreationForm(forms.ModelForm):
@@ -30,6 +30,26 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
+class WorkExperienceEntryInline(admin.TabularInline):
+    model = WorkExperienceEntry
+    extra = 1
+
+class ProjectInline(admin.TabularInline):
+    model = Project
+    extra = 1
+
+class LanguageInline(admin.TabularInline):
+    model = Language
+    extra = 1
+
+class CertificationInline(admin.TabularInline):
+    model = Certification
+    extra = 1
+
+class EducationInline(admin.TabularInline):
+    model = Education
+    extra = 1
+
 
 class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
@@ -47,7 +67,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields':('email','password')}),
-        ('Contact information', {'fields': ('first_name','last_name')})
+        ('Contact information', {'fields': ('first_name','middle_name','last_name','website','linkedin_profile','phone_number','address','professional_summary')}),
     )
     add_fieldsets = (
         (None, {'fields':('email','password1','password2')}),
@@ -56,6 +76,9 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
+    inlines = [
+        WorkExperienceEntryInline, ProjectInline, LanguageInline, EducationInline, CertificationInline
+    ]
 
 admin.site.register(CVBUser, UserAdmin)
 admin,site.unregister(Group)
