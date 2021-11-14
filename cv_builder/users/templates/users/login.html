@@ -26,11 +26,11 @@ CV Builder - Login
                     {% csrf_token %}
                     <h1 class="h3 mb-3 fw-bold">Log in to CV Builder</h1>
                     {% if form.errors %}
-                            <p class=" fw-bold alert alert-danger">Your username and password didn't match. Please try again.</p>
+                            <p class=" fw-bold alert alert-danger">Your email address and password didn't match. Please try again.</p>
                     {% endif %} 
                     <div class="form-floating mt-3 mb-1">
-                    <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
-                    <label for="floatingInput">Username</label>
+                    <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Email address">
+                    <label for="floatingInput">Email address</label>
                     </div>
                     <div class="form-floating mt-1 mb-3">
                     <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
