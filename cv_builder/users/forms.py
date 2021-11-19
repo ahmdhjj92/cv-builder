@@ -1,11 +1,11 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 
 
 User = get_user_model()
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True,error_messages={'required':'Email is required'})
     first_name = forms.CharField(required=True, error_messages={'required':'First Name is required'})
@@ -22,3 +22,14 @@ class UserRegisterForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise ValidationError("A user with that email address already exists")
         return email
+
+
+class HeaderForm(forms.Form):
+    first_name = forms.CharField(max_length=200)
+    middle_name = forms.CharField(max_length=100, required=False)
+    last_name = forms.CharField(max_length=200)
+    website = forms.URLField(required=False)
+    linkedin_profile = forms.URLField(required=False)
+    phone_number  = forms.SlugField(max_length=100, required=False)
+    address = forms.SlugField(max_length=200, required=False)
+    professional_summary = forms.CharField(widget=forms.Textarea,required=False)
