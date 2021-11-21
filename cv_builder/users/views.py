@@ -1,11 +1,11 @@
 from django.forms import fields
-from django.forms.models import inlineformset_factory, modelformset_factory
+from django.forms.models import inlineformset_factory
 from django.forms.widgets import SelectDateWidget
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import CVBUser, WorkExperienceEntry
 from .forms import HeaderForm, UserRegisterForm
-
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == "POST":
@@ -19,6 +19,7 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
+@login_required
 def header(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -46,7 +47,7 @@ def header(request):
 
     return render(request, 'users/contact.html', {'form': form})
 
-
+@login_required
 def work_experience(request):
     WorkExperienceEntryFormset = inlineformset_factory(CVBUser,WorkExperienceEntry, fields=('institution','address','starting_date','end_date','current_position'), widgets={"starting_date":SelectDateWidget()})
     if request.method == 'POST':
