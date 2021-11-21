@@ -1,0 +1,20 @@
+{% extends "cv_builder_app/layout.html" %}
+{% load static %}
+{% block title %}
+    CV Builder - Contact Info
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <form method="post">
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {% csrf_token %}
+                {{ form }}
+                <hr>
+            {% endfor %}
+            <input type="submit" value="Submit">
+        </form>    
+    </div>                     
+</div>
+{% endblock %}

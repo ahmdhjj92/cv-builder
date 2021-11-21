@@ -1,7 +1,9 @@
-from django.contrib.auth import forms, get_user_model
-from django.http.response import HttpResponseRedirect
+from django.forms import fields
+from django.forms.models import inlineformset_factory, modelformset_factory
+from django.forms.widgets import SelectDateWidget
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from .models import CVBUser, WorkExperienceEntry
 from .forms import HeaderForm, UserRegisterForm
 
 
@@ -33,12 +35,32 @@ def header(request):
             request.user.phone_number  = form.cleaned_data['phone_number']
             request.user.address = form.cleaned_data['address']
             request.user.professional_summary = form.cleaned_data['professional_summary']
+            request.user.save()
 
             # redirect to a new URL:
-            return render(request, 'users/register.html')
+            return redirect('users:work')
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = HeaderForm()
 
     return render(request, 'users/contact.html', {'form': form})
+
+
+def work_experience(request):
+    WorkExperienceEntryFormset = inlineformset_factory(CVBUser,WorkExperienceEntry, fields=('institution','address','starting_date','end_date','current_position'), widgets={"starting_date":SelectDateWidget()})
+    if request.method == 'POST':
+        formset = WorkExperienceEntryFormset(request.POST, request.FILES, instance=request.user)
+        # check whether it's valid:
+        if formset.is_valid():
+            # process the data in form.cleaned_data as required
+            request.user.save()
+            formset.save()
+
+            # redirect to a new URL:
+            return render(request, 'users/register.html')
+
+    else:
+        formset = WorkExperienceEntryFormset()
+
+    return render(request, 'users/work.html', {'formset': formset})
