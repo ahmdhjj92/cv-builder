@@ -41,7 +41,7 @@ class CVBUser(AbstractBaseUser):
     website = models.URLField(null=True, blank=True)
     linkedin_profile = models.URLField(null=True, blank=True)
     phone_number  = models.SlugField(max_length=100, null=True, blank=True)
-    address = models.SlugField(max_length=200, null=True, blank=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
     professional_summary = models.TextField(null=True, blank=True)
 
 

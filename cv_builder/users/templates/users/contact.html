@@ -8,17 +8,29 @@
     <div class="row">
         <form method="post">
             {% csrf_token %}
-            <div class="row">
-                {% for field in form %}
-                <div class="col-6 my-2">
-                    <div class="form-floating">
-                        <input type="text" name="{{field.label}}" class="form-control" id="floatingInput" placeholder="{{field.label}}">
-                        <label for="floatingInput">{{field.label}}</label>
-                    </div>                        
+            <h1 class="h3 mb-3 fw-bold text-center">Header Section</h1>
+            <div>
+                {% if form.errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="row">
+                    {% for field in form %}
+                        <div class="col-6 my-2">
+                            <div class="form-floating">
+                                <input type="text" name="{{field.name}}" class="form-control" id="floatingInput" placeholder="{{field.label}}">
+                                <strong class="text-danger">{{field.errors}}</strong>
+                                <label for="floatingInput">
+                                        {{field.label}}
+                                </label>
+                            </div>                        
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-            </div>
-            <button class="justify-content-start btn btn-primary" type="submit">Next: Work Experience</button>
+            <button class="justify-content-start btn btn-primary" type="submit">Next: Professional Summary</button>
         </form>    
     </div>                     
 </div>

@@ -21,13 +21,6 @@
                     <h1 class="h3 mb-3 fw-bold text-center">Register to CV Builder</h1>
                     <div>
                         {% if form.errors %}
-                                {% for field in form %}
-                                {% for error in field.errors %}
-                                    <div class="alert alert-danger">
-                                        <strong>{{ error|escape }}</strong>
-                                    </div>
-                                {% endfor %}
-                            {% endfor %}
                             {% for error in form.non_field_errors %}
                                 <div class="alert alert-danger">
                                     <strong>{{ error|escape }}</strong>
@@ -39,30 +32,35 @@
                         <div class="col-6">
                             <div class="form-floating">
                                 <input type="text" name="first_name" class="form-control" id="floatingInput" placeholder="First Name">
+                                <strong class="text-danger">{{form.first_name.errors}}</strong>
                                 <label for="floatingInput">First Name</label>
                             </div>                        
                         </div>
                         <div class="col-6">
                             <div class="form-floating">
                                 <input type="text" name="last_name" class="form-control" id="floatingInput" placeholder="Last Name">
+                                <strong class="text-danger">{{form.last_name.errors}}</strong>
                                 <label for="floatingInput">Last Name</label>
                             </div>                        
                         </div>
                     </div>
                     <div class="form-floating mt-2 mb-2">
                         <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email Address">
+                        <strong class="text-danger">{{form.email.errors}}</strong>
                         <label for="floatingInput">Email Address</label>
                     </div>
                     <div class="row mt-2 mb-3">
                         <div class="col-6">
                             <div class="form-floating">
                                 <input type="password" name="password1" class="form-control" id="floatingPassword" placeholder="Password">
+                                <strong class="text-danger">{{form.password1.errors}}</strong>
                                 <label for="floatingPassword">Password</label>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-floating">
                                 <input type="password" name="password2" class="form-control" id="floatingPassword" placeholder="Confirm Password">
+                                <strong class="text-danger">{{form.password2.errors}}</strong>
                                 <label for="floatingPassword">Confirm Password</label>
                             </div>
                         </div>

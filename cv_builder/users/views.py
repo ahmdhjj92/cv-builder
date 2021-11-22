@@ -4,7 +4,7 @@ from django.forms.widgets import SelectDateWidget
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import CVBUser, WorkExperienceEntry
-from .forms import HeaderForm, UserRegisterForm
+from .forms import HeaderForm, ProfessionalSummaryForm, UserRegisterForm
 from django.contrib.auth.decorators import login_required
 
 def register(request):
@@ -24,7 +24,7 @@ def header(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = HeaderForm(request.POST)
+        form = HeaderForm(request.POST, initial={'first_name':request.user.first_name,'last_name':request.user.last_name, 'email':request.user.email })
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -35,6 +35,27 @@ def header(request):
             request.user.linkedin_profile = form.cleaned_data['linkedin_profile']
             request.user.phone_number  = form.cleaned_data['phone_number']
             request.user.address = form.cleaned_data['address']
+            request.user.save()
+
+            # redirect to a new URL:
+            return redirect('users:summary')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = HeaderForm()
+
+    return render(request, 'users/contact.html', {'form': form})
+
+
+@login_required
+def summary(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ProfessionalSummaryForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
             request.user.professional_summary = form.cleaned_data['professional_summary']
             request.user.save()
 
@@ -43,9 +64,10 @@ def header(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = HeaderForm()
+        form = ProfessionalSummaryForm()
 
-    return render(request, 'users/contact.html', {'form': form})
+    return render(request, 'users/summary.html', {'form': form})
+
 
 @login_required
 def work_experience(request):

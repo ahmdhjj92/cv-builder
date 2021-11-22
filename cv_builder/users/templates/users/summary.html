@@ -1,0 +1,17 @@
+{% extends "cv_builder_app/layout.html" %}
+{% load static %}
+{% block title %}
+    CV Builder - Contact Info
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <form method="post">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-bold text-center">Professional Summary</h1>
+            {{form}}
+            <button class="justify-content-start btn btn-primary" type="submit">Next: Work Experience</button>
+        </form>    
+    </div>                     
+</div>
+{% endblock %}
