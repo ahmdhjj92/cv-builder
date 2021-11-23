@@ -9,7 +9,9 @@
         <form method="post">
             {% csrf_token %}
             <h1 class="h3 mb-3 fw-bold text-center">Professional Summary</h1>
-            {{form}}
+            <div class="mb-3">
+                <textarea class="form-control" name="professional_summary" placeholder="Optional" rows="6"></textarea>
+              </div>
             <button class="justify-content-start btn btn-primary" type="submit">Next: Work Experience</button>
         </form>    
     </div>                     
