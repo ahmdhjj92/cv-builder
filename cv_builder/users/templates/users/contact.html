@@ -21,16 +21,34 @@
                     {% for field in form %}
                         <div class="col-6 my-2">
                             <div class="form-floating">
-                                <input type="text" name="{{field.name}}" class="form-control" id="floatingInput" placeholder="{{field.label}}">
-                                <strong class="text-danger">{{field.errors}}</strong>
+                                <input type="text" name="{{field.name}}" value= "{{request.user.name}}" class="form-control 
+                                {% if field.errors %}
+                                    is-invalid
+                                {% endif %}
+                                " id="floatingInput" placeholder="{{field.label}}">
+                                <div class="invalid-feedback">
+                                    {{field.errors}}
+                                </div>
                                 <label for="floatingInput">
                                         {{field.label}}
+                                        {% if field.field.required %}
+                                            *
+                                        {% endif %}
                                 </label>
+                                <div class="col-auto">
+                                    {% if field.field.required and not form.errors %}
+                                        <span id="passwordHelpInline" class="form-text">
+                                        {{field.label}} is required.
+                                        </span>
+                                    {% endif %}
+                                  </div>
+                                
                             </div>                        
                         </div>
                     {% endfor %}
                 </div>
-            <button class="justify-content-start btn btn-primary" type="submit">Next: Professional Summary</button>
+                <button class="justify-content-start btn btn-primary" type="submit">Next: Professional Summary</button>
+            </div>
         </form>    
     </div>                     
 </div>
