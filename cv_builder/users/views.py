@@ -31,6 +31,7 @@ def header(request):
             request.user.first_name = form.cleaned_data['first_name']
             request.user.middle_name = form.cleaned_data['middle_name']
             request.user.last_name = form.cleaned_data['last_name']
+            request.user.cv_email = form.cleaned_data['email_on_resume']
             request.user.website = form.cleaned_data['website']
             request.user.linkedin_profile = form.cleaned_data['linkedin_profile']
             request.user.phone_number  = form.cleaned_data['phone_number']

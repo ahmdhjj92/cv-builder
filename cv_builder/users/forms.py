@@ -29,7 +29,7 @@ class HeaderForm(forms.Form):
     first_name = forms.CharField(max_length=200, error_messages={'required':'First Name is required'})
     middle_name = forms.CharField(max_length=100, required=False)
     last_name = forms.CharField(max_length=200, error_messages={'required':'Last Name is required'})
-    email = forms.EmailField(required=True,error_messages={'required':'Email is required'})
+    email_on_resume = forms.EmailField(required=True,error_messages={'required':'Email is required'})
     website = forms.URLField(required=False)
     linkedin_profile = forms.URLField(required=False)
     phone_number  = forms.SlugField(max_length=100, required=False)

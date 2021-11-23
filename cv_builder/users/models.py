@@ -38,6 +38,7 @@ class CVBUser(AbstractBaseUser):
     first_name = models.CharField(max_length=200)
     middle_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=200)
+    cv_email = models.EmailField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
     linkedin_profile = models.URLField(null=True, blank=True)
     phone_number  = models.SlugField(max_length=100, null=True, blank=True)
