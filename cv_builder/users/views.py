@@ -43,7 +43,7 @@ def header(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = HeaderForm()
+        form = HeaderForm(initial={'first_name':request.user.first_name,'last_name':request.user.last_name, 'email_on_resume':request.user.email})
 
     return render(request, 'users/contact.html', {'form': form})
 

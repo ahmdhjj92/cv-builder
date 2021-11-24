@@ -19,35 +19,29 @@
                 {% endif %}
                 <div class="row">
                     {% for field in form %}
-                        <div class="col-6 my-2">
+                        <div class="col-lg-4 col-12">
                             <div class="form-floating">
-                                <input type="text" name="{{field.name}}" value= "{{request.user.name}}" class="form-control 
+                                <input type="text" name="{{field.name}}" value="{% if field.value != None %}{{field.value}}{% endif %}" class="my-2 form-control 
                                 {% if field.errors %}
                                     is-invalid
                                 {% endif %}
-                                " id="floatingInput" placeholder="{{field.label}}">
+                                " id="floatingInput">
                                 <div class="invalid-feedback">
                                     {{field.errors}}
                                 </div>
                                 <label for="floatingInput">
                                         {{field.label}}
                                         {% if field.field.required %}
-                                            *
+                                            <span class="text-danger">*</span>
                                         {% endif %}
-                                </label>
-                                <div class="col-auto">
-                                    {% if field.field.required and not form.errors %}
-                                        <span id="passwordHelpInline" class="form-text">
-                                        {{field.label}} is required.
-                                        </span>
-                                    {% endif %}
-                                  </div>
-                                
+                                </label>                                
                             </div>                        
                         </div>
                     {% endfor %}
                 </div>
-                <button class="justify-content-start btn btn-primary" type="submit">Next: Professional Summary</button>
+                <div class="row justify-content-end mt-2 px-3">
+                    <button class="col-lg-4 col-12 btn-lg btn-primary" type="submit">Next: Professional Summary</button>
+                </div>
             </div>
         </form>    
     </div>                     
