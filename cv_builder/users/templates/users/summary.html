@@ -1,7 +1,7 @@
 {% extends "cv_builder_app/layout.html" %}
 {% load static %}
 {% block title %}
-    CV Builder - Contact Info
+    CV Builder - Professional Summary
 {% endblock %}
 {% block content %}
 <div class="container mt-5">
@@ -12,8 +12,15 @@
             <div class="mb-3">
                 <textarea class="form-control" name="professional_summary" placeholder="Here you should explain what you’re great at and most interested in professionally." rows="6"></textarea>
             </div>
-            <div class="row justify-content-end">
-                <button class="col-3 btn-lg btn-primary" type="submit">Next: Work Experience</button>
+            <div class="row">
+                <div class="col-6">
+                    <a href="{% url 'users:header' %}">
+                        <button class="col-6 btn-lg btn-primary" type="button">Back: Header Section</button>
+                    </a>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <button class="col-6 btn-lg btn-primary" type="submit">Next: Work Experience</button>
+                </div>
             </div>
         </form>    
     </div>                     

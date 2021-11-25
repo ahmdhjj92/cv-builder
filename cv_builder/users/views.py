@@ -45,7 +45,7 @@ def header(request):
     else:
         form = HeaderForm(initial={'first_name':request.user.first_name,'last_name':request.user.last_name, 'email_on_resume':request.user.email})
 
-    return render(request, 'users/contact.html', {'form': form})
+    return render(request, 'users/header.html', {'form': form})
 
 
 @login_required
