@@ -43,7 +43,16 @@ def header(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = HeaderForm(initial={'first_name':request.user.first_name,'last_name':request.user.last_name, 'email_on_resume':request.user.email})
+        initial_data = {}
+        initial_data['first_name'] = getattr(request.user,'first_name')
+        initial_data['middle_name'] = getattr(request.user,'middle_name')
+        initial_data['last_name'] = getattr(request.user,'last_name')
+        initial_data['email_on_resume'] = getattr(request.user,'cv_email')
+        initial_data['website'] = getattr(request.user,'website')
+        initial_data['linkedin_profile'] = getattr(request.user,'linkedin_profile')
+        initial_data['phone_number'] = getattr(request.user,'phone_number')
+        initial_data['address'] = getattr(request.user,'address')
+        form = HeaderForm(initial=initial_data)
 
     return render(request, 'users/header.html', {'form': form})
 
@@ -65,7 +74,7 @@ def summary(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = ProfessionalSummaryForm()
+        form = ProfessionalSummaryForm(initial={'professional_summary': request.user.professional_summary})
 
     return render(request, 'users/summary.html', {'form': form})
 
