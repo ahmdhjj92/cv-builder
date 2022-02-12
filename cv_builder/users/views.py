@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.forms import fields
 from django.forms.models import inlineformset_factory
 from django.forms.widgets import SelectDateWidget
@@ -81,7 +82,7 @@ def summary(request):
 
 @login_required
 def work_experience(request):
-    WorkExperienceEntryFormset = inlineformset_factory(CVBUser,WorkExperienceEntry, fields=('institution','address','starting_date','end_date','current_position'), widgets={"starting_date":SelectDateWidget()})
+    WorkExperienceEntryFormset = inlineformset_factory(CVBUser,WorkExperienceEntry, fields=('institution','address','starting_date','end_date','current_position'), widgets={"starting_date":SelectDateWidget()}, extra=1)
     if request.method == 'POST':
         formset = WorkExperienceEntryFormset(request.POST, request.FILES, instance=request.user)
         # check whether it's valid:
@@ -91,9 +92,14 @@ def work_experience(request):
             formset.save()
 
             # redirect to a new URL:
-            return render(request, 'users/register.html')
+            return render(request, 'users/projects.html')
 
     else:
         formset = WorkExperienceEntryFormset()
 
     return render(request, 'users/work.html', {'formset': formset})
+
+
+@login_required
+def projects(request):
+    return render(request, 'users/projects.html')
