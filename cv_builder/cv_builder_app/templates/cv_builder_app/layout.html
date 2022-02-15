@@ -84,5 +84,18 @@
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script>
+      var checkbox = document.getElementById('flexSwitchCheckDefault1');
+      if(checkbox){
+          checkbox.addEventListener('change', e => {
+            if(e.target.checked){
+              document.getElementById('enddatecheck').setAttribute('hidden',true)
+            }
+            if(!e.target.checked){
+              document.getElementById('enddatecheck').removeAttribute('hidden')
+            }
+          })
+      };
+  </script>
   </body>
 </html>
