@@ -1,7 +1,8 @@
+from multiprocessing import current_process
 from django.contrib.auth import login
-from django.forms import fields
+from .forms import DateInput
 from django.forms.models import inlineformset_factory
-from django.forms.widgets import SelectDateWidget
+from django.forms.widgets import NullBooleanSelect
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import CVBUser, WorkExperienceEntry
@@ -82,7 +83,7 @@ def summary(request):
 
 @login_required
 def work_experience(request):
-    WorkExperienceEntryFormset = inlineformset_factory(CVBUser,WorkExperienceEntry, fields=('institution','address','starting_date','end_date','current_position'), widgets={"starting_date":SelectDateWidget()}, extra=1)
+    WorkExperienceEntryFormset = inlineformset_factory(CVBUser,WorkExperienceEntry, fields=('institution','address','starting_date','end_date','current_position'), widgets={"starting_date":DateInput(),"end_date":DateInput(),"current_position":NullBooleanSelect()}, extra=1)
     if request.method == 'POST':
         formset = WorkExperienceEntryFormset(request.POST, request.FILES, instance=request.user)
         # check whether it's valid:
