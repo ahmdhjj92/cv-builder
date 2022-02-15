@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import modelformset_factory
+from django.forms import SelectDateWidget, modelformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
@@ -38,3 +38,6 @@ class HeaderForm(forms.Form):
 
 class ProfessionalSummaryForm(forms.Form):
     professional_summary = forms.CharField(widget=forms.Textarea,required=False)
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
