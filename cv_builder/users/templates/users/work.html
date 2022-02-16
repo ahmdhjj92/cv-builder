@@ -6,57 +6,95 @@
 {% block content %}
 <div class="container mt-5">
     <form method="post">
-    <h1 class="h3 mb-3 fw-bold text-center">Work Experience</h1>
-    <div class="row">
-        <div class="col-12">
-            <h1 class="h4 my-3 text-center">Add a new entry</h1>
+        <h1 class="h3 mb-3 fw-bold text-center">Work Experience</h1>
+        <div class="row">
+            <div class="col-12">
+                <h1 class="h4 my-3 text-center">Add a new entry</h1>
                 {{ formset.management_form }}
-                {% for form in formset %}
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="text" name="institution" class="form-control" id="floatingInput" placeholder="Institution">
-                                <strong class="text-danger">{{form.institution.errors}}</strong>
-                                <label for="floatingInput">Institution</label>
-                            </div>
-                        </div>                       
-                        <div class="col-12 mt-3 mb-2">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
-                                <label class="form-check-label">This is my current position</label>
+                    {% for form in formset %}
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-6 my-2">
+                                <div class="form-floating">
+                                    <input type="text" name="workexperienceentry_set-{{forloop.counter0}}-institution" class="form-control" id="floatingInput" placeholder="Institution" value="{{institution.value}}">
+                                    <strong class="text-danger">{{form.institution.errors}}</strong>
+                                    <label for="floatingInput">Institution</label>
                                 </div>
+                            </div>                       
+                            <div class="col-lg-6 my-2">
+                                <div class="form-floating">
+                                    <input type="text" name="workexperienceentry_set-{{forloop.counter0}}-address" class="form-control" id="floatingInput" placeholder="Address">
+                                    <strong class="text-danger">{{form.address.errors}}</strong>
+                                    <label for="floatingInput">Address</label>
+                                </div>
+                            </div>                       
+                            <div class="col-12 my-2">
+                                <div class="form-check form-switch">
+                                    <input name="workexperienceentry_set-{{forloop.counter0}}-current_position" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
+                                    <label class="form-check-label">This is my current position</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 mt-2 mb-2">
-                            <div class="form-floating">
-                                <input type="date" name="starting_date" class="form-control" id="floatingInput" placeholder="Starting Date">
-                                <strong class="text-danger">{{form.starting_date.errors}}</strong>
-                                <label for="floatingInput">Starting Date</label>
-                            </div>                        
+                        <div class="row">
+                            <div class="col-6 my-2">
+                                <div class="form-floating">
+                                    <input type="date" name="workexperienceentry_set-{{forloop.counter0}}-starting_date" class="form-control" id="floatingInput" placeholder="Starting Date">
+                                    <strong class="text-danger">{{form.starting_date.errors}}</strong>
+                                    <label for="floatingInput">Starting Date</label>
+                                </div>                        
+                            </div>
+                            <div class="col-6 mt-2 mb-2" id="enddatecheck">
+                                <div class="form-floating">
+                                    <input type="date" name="workexperienceentry_set-{{forloop.counter0}}-end_date" class="form-control" id="floatingInput" placeholder="End Date">
+                                    <strong class="text-danger">{{form.end_date.errors}}</strong>
+                                    <label for="floatingInput">End Date</label>
+                                </div>                        
+                            </div>
+                            <div class="col-12 my-2">
+                                <div class="form-floating">
+                                    <input type="text" name="workexperienceentry_set-{{forloop.counter0}}-title" class="form-control" id="floatingInput" placeholder="Title">
+                                    <strong class="text-danger">{{form.title.errors}}</strong>
+                                    <label for="floatingInput">Title</label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-6 mt-2 mb-2" id="enddatecheck">
-                            <div class="form-floating">
-                                <input type="date" name="end_date" class="form-control" id="floatingInput" placeholder="End Date">
-                                <strong class="text-danger">{{form.end_date.errors}}</strong>
-                                <label for="floatingInput">End Date</label>
-                            </div>                        
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+                        <hr>
+                    {% endfor %}
+            </div>
         </div>
-    <div class="row">
-        <div class="col-12 col-md-6">
-            <a href="{% url 'users:summary' %}">
-                <button class="col-12 col-xl-8 col-md-8 my-2 btn-lg btn-primary" type="button">Back: Professional Summary</button>
-            </a>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <a href="{% url 'users:summary' %}">
+                    <button class="col-12 col-xl-8 col-md-8 my-2 btn-lg btn-primary" type="button">Back: Professional Summary</button>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 d-flex justify-content-end">
+                <button class="col-12 col-xl-8 col-md-8 my-2 btn-lg btn-primary" type="submit">Save and add another</button>
+            </div>
         </div>
-        <div class="col-12 col-md-6 d-flex justify-content-end">
-            <button class="col-12 col-xl-8 col-md-8 my-2 btn-lg btn-primary" type="submit">Next: Projects</button>
-        </div>
-    </div>
-    </form>    
+    </form>
+    <table class="table table-striped mt-4">
+        <thead class="table-dark">
+            <tr>
+              <th scope="col">Institution</th>
+              <th scope="col">Address</th>
+              <th scope="col">Title</th>
+              <th scope="col">Starting Date</th>
+              <th scope="col">End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for experience in experiences %}
+                <tr>
+                <th>{{experience.institution}}</th>
+                <td>{{experience.address}}</td>
+                <td>{{experience.title}}</td>
+                <td>{{experience.starting_date}}</td>
+                <td>{% if experience.end_date != None %}{{experience.end_date}}{% else %}Present{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </div>
 {% endblock %}

@@ -83,22 +83,23 @@ def summary(request):
 
 @login_required
 def work_experience(request):
-    WorkExperienceEntryFormset = inlineformset_factory(CVBUser,WorkExperienceEntry, fields=('institution','address','starting_date','end_date','current_position'), widgets={"starting_date":DateInput(),"end_date":DateInput(),"current_position":NullBooleanSelect()}, extra=1)
+    work_experiences = WorkExperienceEntry.objects.filter(user=request.user)
+    #initial_list = list(work_experiences.values())
+    WorkExperienceEntryFormset = inlineformset_factory(CVBUser,WorkExperienceEntry, fields=('institution','address','starting_date','title','end_date','current_position'), widgets={"starting_date":DateInput(),"end_date":DateInput(),"current_position":NullBooleanSelect()}, extra=1)
     if request.method == 'POST':
         formset = WorkExperienceEntryFormset(request.POST, request.FILES, instance=request.user)
         # check whether it's valid:
         if formset.is_valid():
-            # process the data in form.cleaned_data as required
-            request.user.save()
+            # process the data in form.cleaned_data as required            
             formset.save()
-
+            
             # redirect to a new URL:
-            return render(request, 'users/projects.html')
+            return redirect('users:work')
 
     else:
         formset = WorkExperienceEntryFormset()
 
-    return render(request, 'users/work.html', {'formset': formset})
+    return render(request, 'users/work.html', {'formset': formset, 'experiences':work_experiences})
 
 
 @login_required
