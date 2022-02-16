@@ -75,6 +75,7 @@ class WorkExperienceEntry(models.Model):
     user = models.ForeignKey(CVBUser, on_delete=models.CASCADE)
     institution = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     starting_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     current_position = models.BooleanField()
