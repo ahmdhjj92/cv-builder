@@ -67,11 +67,11 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields':('email','password')}),
-        ('Contact information', {'fields': ('first_name','middle_name','last_name','website','linkedin_profile','phone_number','address','professional_summary')}),
+        ('Header', {'fields': ('first_name','middle_name','last_name','website','cv_email','linkedin_profile','phone_number','address','professional_summary')}),
     )
     add_fieldsets = (
         (None, {'fields':('email','password1','password2')}),
-        ('Contact information', {'fields': ('first_name','last_name')})
+        ('Header', {'fields': ('first_name','last_name')})
     )
     search_fields = ('email',)
     ordering = ('email',)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
       <title>{% block title %}{% endblock %}</title>
       <meta charset="utf-8">
@@ -8,7 +8,7 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
       <link rel="shortcut icon" type="image/jpg" href="https://img.icons8.com/fluency-systems-filled/48/000000/user.png"/>
   </head>
-  <body>
+  <body class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,49 +40,62 @@
             </ul>
         </div>
       </div>
-    </nav>    
+    </nav> 
+    <main class="flex-shrink-0 mb-5">
       {% block content %}{% endblock %}
-      <div class="mt-5 container-fluid bg-light">
-        <footer class="px-5 py-5">
-          <div class="row">
-            <div class="col-6">
-              <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="{% url 'cv_builder_app:index' %}" aria-label="Bootstrap">
-                <img src="https://img.icons8.com/fluency-systems-filled/48/000000/user.png" alt="CV Builder icon" width="24" height="24" class="d-inline-block align-text-top">
-                <span class="px-1 fs-5 fw-bold">CV Builder</span>
-              </a>
-              <ul class="list-unstyled small text-muted">
-                <li class="mb-2">Built using <a href="https://www.djangoproject.com/" target="_blank">Django</a> and <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>.</li>
-                <li class="mb-2">Code available at <a href="https://github.com/ahmdhjj92/cv-builder" target="_blank" rel="license noopener">Github</a>.</li>
-                <li class="mb-2">Currently v0.1.</li>
-              </ul>
-            </div>
-            <div class="col-3">
-              <h5>Links</h5>
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="{% url 'cv_builder_app:index' %}" class="nav-link p-0 text-muted">Home</a></li>
-                <li class="nav-item mb-2"><a href="{% url 'cv_builder_app:about' %}" class="nav-link p-0 text-muted">About</a></li>
-              </ul>
-            </div>
-            <div class="col-3">
-              <h5>User</h5>
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="{% url 'login' %}" class="nav-link p-0 text-muted">Login</a></li>
-                <li class="nav-item mb-2"><a href="{% url 'logout' %}" class="nav-link p-0 text-muted">Logout</a></li>
-                <li class="nav-item mb-2"><a href="{% url 'register' %}" class="nav-link p-0 text-muted">Register</a></li>
-                <li class="nav-item mb-2"><a href="{% url 'admin:index' %}" class="nav-link p-0 text-muted">Site Administration</a></li>
-              </ul>
-            </div>
-          </div>  
-          <div class="d-flex justify-content-between py-4 my-4 border-top">
-            <p>&copy; 2021 CV Builder. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-            </ul>
-          </div>
-        </footer>
+    </main>  
+    <footer class="footer mt-auto py-3 px-5 bg-light">
+      <div class="row">
+        <div class="col-6">
+          <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="{% url 'cv_builder_app:index' %}" aria-label="Bootstrap">
+            <img src="https://img.icons8.com/fluency-systems-filled/48/000000/user.png" alt="CV Builder icon" width="24" height="24" class="d-inline-block align-text-top">
+            <span class="px-1 fs-5 fw-bold">CV Builder</span>
+          </a>
+          <ul class="list-unstyled small text-muted">
+            <li class="mb-2">Built using <a href="https://www.djangoproject.com/" target="_blank">Django</a> and <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>.</li>
+            <li class="mb-2">Code available at <a href="https://github.com/ahmdhjj92/cv-builder" target="_blank" rel="license noopener">Github</a>.</li>
+            <li class="mb-2">Currently v0.1.</li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <h5>Links</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="{% url 'cv_builder_app:index' %}" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="{% url 'cv_builder_app:about' %}" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <h5>User</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="{% url 'login' %}" class="nav-link p-0 text-muted">Login</a></li>
+            <li class="nav-item mb-2"><a href="{% url 'logout' %}" class="nav-link p-0 text-muted">Logout</a></li>
+            <li class="nav-item mb-2"><a href="{% url 'register' %}" class="nav-link p-0 text-muted">Register</a></li>
+            <li class="nav-item mb-2"><a href="{% url 'admin:index' %}" class="nav-link p-0 text-muted">Site Administration</a></li>
+          </ul>
+        </div>
+      </div>  
+      <div class="d-flex justify-content-between pt-4 mt-4 border-top">
+        <p>&copy; 2021 CV Builder. All rights reserved.</p>
+        <ul class="list-unstyled d-flex">
+          <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+          <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+          <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+        </ul>
       </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script>
+      var checkbox = document.getElementById('flexSwitchCheckDefault1');
+      if(checkbox){
+          checkbox.addEventListener('change', e => {
+            if(e.target.checked){
+              document.getElementById('enddatecheck').setAttribute('hidden',true)
+            }
+            if(!e.target.checked){
+              document.getElementById('enddatecheck').removeAttribute('hidden')
+            }
+          })
+      };
+  </script>
   </body>
 </html>

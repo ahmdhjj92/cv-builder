@@ -130,5 +130,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'cv_builder_app:index'
+LOGIN_URL = 'login'
 
 AUTH_USER_MODEL = 'users.CVBUser'

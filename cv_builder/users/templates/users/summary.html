@@ -1,0 +1,28 @@
+{% extends "cv_builder_app/layout.html" %}
+{% load static %}
+{% block title %}
+    CV Builder - Professional Summary
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <form method="post">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-bold text-center">Professional Summary</h1>
+            <div class="mb-3">
+                <textarea class="form-control" name="professional_summary" placeholder="Here you should explain what you’re great at and most interested in professionally." rows="6">{% if form.professional_summary.value != None %}{{ form.professional_summary.value }}{% endif %}</textarea>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <a href="{% url 'users:header' %}">
+                        <button class="col-12 col-xl-8 col-md-8 my-2 btn-lg btn-primary" type="button">Back: Header Section</button>
+                    </a>
+                </div>
+                <div class="col-12 col-md-6 d-flex justify-content-end">
+                    <button class="col-12 col-xl-8 col-md-8 my-2 btn-lg btn-primary" type="submit">Next: Work Experience</button>
+                </div>
+            </div>
+        </form>    
+    </div>                     
+</div>
+{% endblock %}

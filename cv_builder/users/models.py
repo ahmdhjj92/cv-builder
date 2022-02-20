@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import (BaseUserManager,AbstractBaseUser)
+from django.forms.widgets import SelectDateWidget, Widget
 
 # Create your models here.
 class CVBUserManager(BaseUserManager):
@@ -28,6 +29,7 @@ class CVBUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
 class CVBUser(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',
@@ -37,10 +39,11 @@ class CVBUser(AbstractBaseUser):
     first_name = models.CharField(max_length=200)
     middle_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=200)
+    cv_email = models.EmailField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
     linkedin_profile = models.URLField(null=True, blank=True)
     phone_number  = models.SlugField(max_length=100, null=True, blank=True)
-    address = models.SlugField(max_length=200, null=True, blank=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
     professional_summary = models.TextField(null=True, blank=True)
 
 
@@ -71,7 +74,8 @@ class CVBUser(AbstractBaseUser):
 class WorkExperienceEntry(models.Model):
     user = models.ForeignKey(CVBUser, on_delete=models.CASCADE)
     institution = models.CharField(max_length=200)
-    address = models.SlugField(max_length=200)
+    address = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     starting_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     current_position = models.BooleanField()
